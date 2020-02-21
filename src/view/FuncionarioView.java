@@ -13,6 +13,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -68,7 +69,13 @@ public class FuncionarioView {
 	private JRadioButton rbtDiurno;
 	private JRadioButton rbtNoturno;
 	private ButtonGroup grpRadio;
-	
+	private JLabel teste;
+	private JLabel teste2;
+	private JTextField txtSecretaria;
+	private JTextField txtProfessor;
+	private JPanel painel1;
+	private JPanel painel2;
+
 //declaração de vetores auxiliares
 	String estados[] = { "São Paulo", "Rio de Janeiro", "Distrito Federal" };
 
@@ -118,7 +125,7 @@ public class FuncionarioView {
 		grpRadio = new ButtonGroup();
 
 		painelDaJanela = (JPanel) janela.getContentPane();
-		painelFaxineira= new JPanel();
+		painelFaxineira = new JPanel();
 
 		// Declaração dos botoes
 		salvar.setText("Salvar");
@@ -159,17 +166,17 @@ public class FuncionarioView {
 			}
 		});
 
-		//declação dos radio buttons
+		// declação dos radio buttons
 		rbtDiurno.setText("Diurno   ");
-		rbtDiurno.setBounds(0,0, 80, 20);
+		rbtDiurno.setBounds(0, 0, 80, 20);
 
 		rbtNoturno.setText("Noturno");
 		rbtNoturno.setBounds(0, 0, 80, 20);
-		
-		//adicionando botões ao button group
+
+		// adicionando botões ao button group
 		grpRadio.add(rbtDiurno);
 		grpRadio.add(rbtNoturno);
-		
+
 		// Declaração das labels
 
 		titulo.setText("______________________Informações de endereço______________________________________");
@@ -295,15 +302,49 @@ public class FuncionarioView {
 		cboxProfissao.setMaximumRowCount(3);
 		cboxProfissao.addActionListener(cbActionListener);
 
-		//adicionando componentes ao painel da faxineira
+		// adicionando componentes ao painel da faxineira
 
 		painelFaxineira.setBounds(350, 100, 100, 100);
 		painelFaxineira.setVisible(false);
 		painelFaxineira.setBorder(new TitledBorder("Período"));
 		painelFaxineira.add(rbtNoturno);
 		painelFaxineira.add(rbtDiurno);
-		
-		
+
+		////
+		teste = new JLabel("Ramal");
+		teste2 = new JLabel("Materia");
+		painel1 = new JPanel();
+		painel2 = new JPanel();
+
+		txtSecretaria = new JTextField();
+		txtProfessor = new JTextField();
+
+		teste.setBounds(65, -20, 100, 80);
+		teste2.setBounds(65, -20, 100, 80);
+
+		txtProfessor.setBounds(10, 45, 153, 30);
+		txtSecretaria.setBounds(30, 45, 125, 30);
+
+		// painel do ramal
+		painel1.setBounds(330, 100, 170, 100);
+		painel1.setLayout(null);
+		painel1.setBorder(BorderFactory.createEtchedBorder());
+		painel1.setVisible(false);
+
+		painel1.add(txtSecretaria);
+		painel1.add(teste);
+
+		painel2.setBounds(330, 100, 170, 100);
+		painel2.setLayout(null);
+		painel2.setBorder(BorderFactory.createEtchedBorder());
+		painel2.setVisible(false);
+
+		painel2.add(txtProfessor);
+		painel2.add(teste2);
+
+		painelDaJanela.add(painel1);
+		painelDaJanela.add(painel2);
+
 		// adicionando componentes no painel da tela
 
 		painelDaJanela.add(lblSalario);
@@ -361,9 +402,22 @@ public class FuncionarioView {
 
 			String r = cboxProfissao.getSelectedItem().toString().toUpperCase();
 			if (r.equals("PROFESSOR")) {
+
+				painel2.setVisible(true);
 				painelFaxineira.setVisible(false);
+				painel1.setVisible(false);
+
 			} else if (r.equals("FAXINEIRA")) {
+
 				painelFaxineira.setVisible(true);
+				painel2.setVisible(false);
+				painel1.setVisible(false);
+
+			} else if (r.equals("SECRETARIA")) {
+
+				painel1.setVisible(true);
+				painelFaxineira.setVisible(false);
+				painel2.setVisible(false);
 			}
 
 		}
