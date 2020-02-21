@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.GridLayout;
+
 /**
  * Pacote de interface grafica do Funcionario
  * @author llopo
@@ -7,7 +9,6 @@ package view;
  * @version 0.1
  * 
  */
-
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,17 +20,19 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
-
+import javax.swing.border.TitledBorder;
 
 import controller.AlunoController;
+import javafx.scene.control.RadioButton;
 
 public class FuncionarioView {
 
 //declaração dos componentes da interface	
 	private JFrame janela;
 	private JPanel painelDaJanela;
+	private JPanel painelFaxineira;
 	private JButton salvar;
 	private JButton cancelar;
 	private JTextField txtSalario;
@@ -62,13 +65,16 @@ public class FuncionarioView {
 	private JComboBox cboxEstado;
 	private JComboBox cboxCidade;
 	private JComboBox cboxProfissao;
-
+	private JRadioButton rbtDiurno;
+	private JRadioButton rbtNoturno;
+	private ButtonGroup grpRadio;
+	
 //declaração de vetores auxiliares
 	String estados[] = { "São Paulo", "Rio de Janeiro", "Distrito Federal" };
 
 	String cidadeSP[] = { "Araraquara", "Carapicuiba", "Lagoinha", "Osasco" };
-	
-	String profissao[]= {"Professor","Secretaria","Faxineira"};
+
+	String profissao[] = { "Professor", "Secretaria", "Faxineira" };
 
 	public void iniciaGui() {
 
@@ -87,6 +93,7 @@ public class FuncionarioView {
 		lblEstado = new JLabel();
 		lblTelefone = new JLabel();
 		lblLogradouro = new JLabel();
+		lblProfissao = new JLabel();
 		lblNum = new JLabel();
 		lblCep = new JLabel();
 		lblComplemento = new JLabel();
@@ -106,8 +113,12 @@ public class FuncionarioView {
 		cboxEstado = new JComboBox(estados);
 		cboxCidade = new JComboBox(cidadeSP);
 		cboxProfissao = new JComboBox(profissao);
+		rbtDiurno = new JRadioButton();
+		rbtNoturno = new JRadioButton();
+		grpRadio = new ButtonGroup();
 
 		painelDaJanela = (JPanel) janela.getContentPane();
+		painelFaxineira= new JPanel();
 
 		// Declaração dos botoes
 		salvar.setText("Salvar");
@@ -142,12 +153,23 @@ public class FuncionarioView {
 
 			public void actionPerformed(ActionEvent e) {
 
-				JOptionPane.showMessageDialog(null, "Cadastro finalizado!","Fim cadastro!",0);
+				JOptionPane.showMessageDialog(null, "Cadastro finalizado!", "Fim cadastro!", 0);
 				janela.dispose();
 
 			}
 		});
 
+		//declação dos radio buttons
+		rbtDiurno.setText("Diurno   ");
+		rbtDiurno.setBounds(0,0, 80, 20);
+
+		rbtNoturno.setText("Noturno");
+		rbtNoturno.setBounds(0, 0, 80, 20);
+		
+		//adicionando botões ao button group
+		grpRadio.add(rbtDiurno);
+		grpRadio.add(rbtNoturno);
+		
 		// Declaração das labels
 
 		titulo.setText("______________________Informações de endereço______________________________________");
@@ -161,9 +183,9 @@ public class FuncionarioView {
 
 		lblTelefone.setText("Telefone");
 		lblTelefone.setBounds(337, 40, 100, 20);
-		
+
 		lblSalario.setText("Salario:");
-		lblSalario.setBounds(5, 104, 80, 20);
+		lblSalario.setBounds(175, 103, 80, 20);
 //		lblMatricula.setForeground(new Color(244, 82, 10));
 
 		lblDataNasc.setText("Data de Nasc:");
@@ -184,9 +206,11 @@ public class FuncionarioView {
 		lblEstado.setText("Estado");
 		lblEstado.setBounds(340, 248, 80, 20);
 
-
 		lblLogradouro.setText("Logradouro");
 		lblLogradouro.setBounds(5, 250, 80, 20);
+
+		lblProfissao.setText("Profissao");
+		lblProfissao.setBounds(5, 103, 80, 20);
 
 		lblNum.setText("Numero");
 		lblNum.setBounds(5, 275, 80, 20);
@@ -201,9 +225,8 @@ public class FuncionarioView {
 		lblBairro.setBounds(5, 350, 80, 20);
 
 		// Declaração dos textfields
-		
 
-		txtSalario.setBounds(60, 105, 100, 20);
+		txtSalario.setBounds(225, 105, 100, 20);
 
 		try {
 			javax.swing.text.MaskFormatter dt = new javax.swing.text.MaskFormatter("(##)#####-####");
@@ -253,7 +276,6 @@ public class FuncionarioView {
 
 		txtNum.setBounds(95, 275, 200, 20);
 
-
 		// configuração da combobox estados
 
 		cboxEstado.setSelectedIndex(-1);
@@ -267,11 +289,21 @@ public class FuncionarioView {
 		cboxCidade.setMaximumRowCount(28);
 
 		// configuração da combobox Profissao
-		
-		cboxProfissao.setSelectedIndex(-1);
-		cboxProfissao.setBounds(200, 115, 100, 20);
-		cboxProfissao.setMaximumRowCount(3);
 
+		cboxProfissao.setSelectedIndex(-1);
+		cboxProfissao.setBounds(65, 103, 100, 20);
+		cboxProfissao.setMaximumRowCount(3);
+		cboxProfissao.addActionListener(cbActionListener);
+
+		//adicionando componentes ao painel da faxineira
+
+		painelFaxineira.setBounds(350, 100, 100, 100);
+		painelFaxineira.setVisible(false);
+		painelFaxineira.setBorder(new TitledBorder("Período"));
+		painelFaxineira.add(rbtNoturno);
+		painelFaxineira.add(rbtDiurno);
+		
+		
 		// adicionando componentes no painel da tela
 
 		painelDaJanela.add(lblSalario);
@@ -289,6 +321,7 @@ public class FuncionarioView {
 		painelDaJanela.add(lblComplemento);
 		painelDaJanela.add(lblCep);
 		painelDaJanela.add(lblBairro);
+		painelDaJanela.add(lblProfissao);
 		painelDaJanela.add(txtSalario);
 		painelDaJanela.add(txtNome);
 		painelDaJanela.add(txtDataNasc);
@@ -305,6 +338,7 @@ public class FuncionarioView {
 		painelDaJanela.add(cboxEstado);
 		painelDaJanela.add(cboxCidade);
 		painelDaJanela.add(cboxProfissao);
+		painelDaJanela.add(painelFaxineira);
 
 		// configurações do painel da tela
 		painelDaJanela.setLayout(null);
@@ -320,13 +354,25 @@ public class FuncionarioView {
 		janela.getContentPane().setLayout(null);
 		janela.setLocationRelativeTo(null);
 
-	
-	
 	}// fim do inicia gui
-public static void main(String[] args) {
-	
-	new FuncionarioView().iniciaGui();
-	
-}
-	
+
+	ActionListener cbActionListener = new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+
+			String r = cboxProfissao.getSelectedItem().toString().toUpperCase();
+			if (r.equals("PROFESSOR")) {
+				painelFaxineira.setVisible(false);
+			} else if (r.equals("FAXINEIRA")) {
+				painelFaxineira.setVisible(true);
+			}
+
+		}
+	};
+
+	public static void main(String[] args) {
+
+		new FuncionarioView().iniciaGui();
+
+	}
+
 }

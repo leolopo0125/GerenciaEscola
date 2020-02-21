@@ -75,6 +75,7 @@ public class MenuView {
 		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		janela.setSize(300,300);
 		janela.setVisible(true);
+		janela.setLocationRelativeTo(null);
 		
 		
 		

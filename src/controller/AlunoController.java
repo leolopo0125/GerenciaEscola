@@ -46,13 +46,9 @@ public class AlunoController {
 		Endereco endereco = new Endereco();
 		Cidade cd = new Cidade();
 		Estado e = new Estado();
+		
 		//atribundo nome de cidade
 		cd.setNome(cidade);
-		
-		//definindo o uf com base no estado selecionado
-		
-
-		
 		e.setNome(estado);
 		e.setUf(uf);
 		
