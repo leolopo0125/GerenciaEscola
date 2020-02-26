@@ -1,17 +1,16 @@
 package view;
 /**
- * Pacote de interface grafica do aluno
- * @author llopo
- * @since 19/02/2020
+ * @author leonardo
+ * @since 20/02/2020
  * @version 0.1
  * 
  */
 
-import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -22,220 +21,145 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
-import javax.swing.border.TitledBorder;
+
 
 import controller.AlunoController;
+import controller.CidadeController;
+import controller.EstadoController;
 
 public class AlunoView {
 
-//declaração dos componentes da interface	
 	private JFrame janela;
 	private JPanel painelDaJanela;
-	private JPanel painelSexo;
-	private JButton salvar;
+	private JPanel painel1;
+	private JPanel painel2;
+	private JLabel lblNome;
+	private JLabel lblTelefone;
+	private JLabel lblDataNasc;
+	private JLabel lblRG;
+	private JLabel lblCPF;
+	private JLabel lblSexo;
+	private JLabel lblMatricula;
 	private JButton cancelar;
-	private JTextField txtMatricula;
+	private JButton salvar;
 	private JTextField txtNome;
 	private JTextField txtDataNasc;
 	private JTextField txtRG;
 	private JTextField txtCPF;
+	private JTextField txtTelefone;
+	private JRadioButton rbtDiurno;
+	private JRadioButton rbtNoturno;
 	private JTextField txtLogradouro;
 	private JTextField txtCep;
 	private JTextField txtNum;
 	private JTextField txtComplemento;
 	private JTextField txtBairro;
-	private JTextField txtTelefone;
-	private JLabel titulo;
-	private JLabel tituloEnd;
-	private JLabel lblMatricula;
-	private JLabel lblNome;
-	private JLabel lblDataNasc;
-	private JLabel lblRG;
-	private JLabel lblCPF;
+	private JTextField txtMatricula;
+	private JLabel lbltituloEnd;
 	private JLabel lblCidade;
 	private JLabel lblEstado;
-	private JLabel lblSenha;
-	private JLabel lblTelefone;
 	private JLabel lblLogradouro;
 	private JLabel lblNum;
 	private JLabel lblCep;
 	private JLabel lblComplemento;
 	private JLabel lblBairro;
-	private JPasswordField jpwSenha;
-	private JLabel jtfSenha;
+	private JComboBox cboxEstado;
+	private JComboBox cboxCidade;
 	private JRadioButton rbtMasculino;
 	private JRadioButton rbtFeminino;
 	private ButtonGroup grpRadio;
-	private JComboBox cboxEstado;
-	private JComboBox cboxCidade;
+	private JPasswordField jpwSenha;
+	private JLabel jtfSenha;
+	private JLabel lblSenha;
+	private JPanel painelSexo;
 
-//declaração de vetores auxiliares
-	String estados[] = { "São Paulo", "Rio de Janeiro", "Distrito Federal" };
-
-	String cidadeSP[] = { "Araraquara", "Carapicuiba", "Lagoinha", "Osasco" };
+	private JLabel lblTitulo;
 
 	public void iniciaGui() {
 
-		// criar as instancias
-		janela = new JFrame("Cadastro de alunos");
-		salvar = new JButton();
-		cancelar = new JButton();
-		rbtMasculino = new JRadioButton();
-		rbtFeminino = new JRadioButton();
-		grpRadio = new ButtonGroup();
-		titulo = new JLabel();
-		tituloEnd = new JLabel();
-		lblMatricula = new JLabel();
+		// criar instancias
+		janela = new JFrame("Cadastro de Alunos");
+		painelDaJanela = (JPanel) janela.getContentPane();
+		painel1 = new JPanel();
+		painel2 = new JPanel();
+
+		lblTitulo = new JLabel("Dados do Aluno");
 		lblNome = new JLabel();
-		lblDataNasc = new JLabel();
-		lblRG = new JLabel();
 		lblCPF = new JLabel();
-		lblCidade = new JLabel();
-		lblEstado = new JLabel();
-		lblSenha = new JLabel();
+		lblRG = new JLabel();
+		lblDataNasc = new JLabel();
+
 		lblTelefone = new JLabel();
-		lblLogradouro = new JLabel();
-		lblNum = new JLabel();
-		lblCep = new JLabel();
-		lblComplemento = new JLabel();
-		lblBairro = new JLabel();
-		txtMatricula = new JTextField();
+		cancelar = new JButton("Cancelar");
+		salvar = new JButton("Salvar");
+
 		txtNome = new JTextField();
 		txtDataNasc = new JTextField();
 		txtRG = new JTextField();
 		txtCPF = new JTextField();
+		txtTelefone = new JTextField();
+
+		rbtDiurno = new JRadioButton();
+		rbtNoturno = new JRadioButton();
+		grpRadio = new ButtonGroup();
+
+		lbltituloEnd = new JLabel("Dados de endereço");
+		lblCidade = new JLabel();
+		lblEstado = new JLabel();
+		lblTelefone = new JLabel();
+		lblLogradouro = new JLabel();
+		lblMatricula = new JLabel();
+		lblNum = new JLabel();
+		lblCep = new JLabel();
+		lblComplemento = new JLabel();
+		lblBairro = new JLabel();
 		txtLogradouro = new JTextField();
 		txtNum = new JTextField();
 		txtCep = new JTextField();
 		txtComplemento = new JTextField();
 		txtBairro = new JTextField();
-		txtTelefone = new JTextField();
+		txtMatricula = new JTextField();
+		cboxEstado = new JComboBox();
+		cboxCidade = new JComboBox();
 		jtfSenha = new JLabel();
 		jpwSenha = new JPasswordField();
-		cboxEstado = new JComboBox(estados);
-		cboxCidade = new JComboBox(cidadeSP);
-
-		painelDaJanela = (JPanel) janela.getContentPane();
+		lblSenha = new JLabel();
+		rbtMasculino = new JRadioButton();
+		rbtFeminino = new JRadioButton();
 		painelSexo = new JPanel();
+		lblSexo = new JLabel();
 
-		// Declaração dos botoes
-		salvar.setText("Salvar");
-		salvar.setBounds(125, 400, 100, 20);
+		lblTitulo.setBounds(180, -20, 250, 80);
+		lbltituloEnd.setBounds(180, 180, 250, 80);
 
-		salvar.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {
-				String uf="";
-				String sexo = "";
-				String cidade = cboxCidade.getSelectedItem().toString().toUpperCase();
-				String estado = cboxEstado.getSelectedItem().toString().toUpperCase();
-				
-				if(cidade.equals("SÃO PAULO")) {
-					uf="SP";
-				}else if(cidade.equals("RIO DE JANEIRO")) {
-					uf="RJ";
-				}else if(cidade.equals("DISTRITO FEDERAL")) {
-					uf="DF";
-				}
-					
-				AlunoController al = new AlunoController();
-
-				if (rbtFeminino.isSelected()) {
-					sexo = "F";
-				} else if (rbtMasculino.isSelected()) {
-					sexo = "M";
-
-				}
-
-				al.consistirDados(txtMatricula.getText(), txtNome.getText(), txtDataNasc.getText(), sexo, cidade,
-						estado, txtRG.getText(), txtCPF.getText(), txtTelefone.getText(), jpwSenha.getText(),
-						txtNum.getText(), txtCep.getText(), txtComplemento.getText(),txtLogradouro.getText(),txtBairro.getText(),uf);
-
-			}
-		});
-
-		// Adicionando Listener
-		cancelar.setText("Cancelar");
-		cancelar.setBounds(240, 400, 100, 20);
-
-		cancelar.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {
-
-				janela.dispose();
-
-			}
-		});
-
-		// declaração de radio buttons masculino e feminino
-		rbtMasculino.setText("Masculino");
-		rbtMasculino.setBounds(225, 103, 90, 20);
-
-		rbtFeminino.setText("Feminino");
-		rbtFeminino.setBounds(325, 103, 85, 20);
-
-		// adição dos botões ao button group
-		grpRadio.add(rbtMasculino);
-		grpRadio.add(rbtFeminino);
-
-		// Declaração das labels
-
-		titulo.setText("______________________Informações de endereço_____________________________________");
-		titulo.setBounds(0, 150, 525, 60);
-
-		tituloEnd.setText("_______________________Informações do Aluno_______________________________");
-		tituloEnd.setBounds(0, 5, 525, 20);
-
+		// DEFININDO LABELS DO PAINEL Aluno
 		lblNome.setText("Nome:");
 		lblNome.setBounds(5, 40, 70, 20);
-//		lblNome.setForeground(new Color(244, 82, 10));
 
 		lblMatricula.setText("Matricula:");
 		lblMatricula.setBounds(337, 40, 100, 20);
-//		lblMatricula.setForeground(new Color(244, 82, 10));
 
 		lblDataNasc.setText("Data de Nasc:");
 		lblDataNasc.setBounds(5, 66, 80, 20);
-//		lblDataNasc.setForeground(new Color(244, 82, 10));
 
 		lblRG.setText("RG:");
 		lblRG.setBounds(197, 67, 85, 20);
-//		lblRG.setForeground(new Color(244, 82, 10));
 
 		lblCPF.setText("CPF:");
 		lblCPF.setBounds(337, 67, 80, 20);
-//		lblCPF.setForeground(new Color(244, 82, 10));
-//
-		lblCidade.setText("Cidade");
-		lblCidade.setBounds(340, 275, 80, 20);
 
-		lblEstado.setText("Estado");
-		lblEstado.setBounds(340, 248, 80, 20);
+		lblSexo.setText("Sexo");
+		lblSexo.setBounds(327, 100, 80, 20);
 
-		lblSenha.setText("Senha");
-		lblSenha.setBounds(5, 90, 83, 20);
+		// definindo textfields com mascara
 
-		lblTelefone.setText("Telefone");
-		lblTelefone.setBounds(5, 114, 80, 20);
 
-		lblLogradouro.setText("Logradouro");
-		lblLogradouro.setBounds(5, 250, 80, 20);
-
-		lblNum.setText("Numero");
-		lblNum.setBounds(5, 275, 80, 20);
-
-		lblCep.setText("Cep");
-		lblCep.setBounds(5, 300, 80, 20);
-		
-		lblComplemento.setText("Complemento");
-		lblComplemento.setBounds(5, 325, 80, 20);
-		
-		lblBairro.setText("Bairro");
-		lblBairro.setBounds(5, 350, 80, 20);
-
-		// Declaração dos textfields
-
-		txtMatricula.setBounds(410, 43, 95, 20);
+		try {
+			javax.swing.text.MaskFormatter dt = new javax.swing.text.MaskFormatter("(##)#####-####");
+			txtTelefone = new javax.swing.JFormattedTextField(dt);
+		} catch (Exception e) {
+		}
+		txtTelefone.setBounds(95, 115, 100, 20);
 
 		txtNome.setBounds(50, 43, 275, 20);
 
@@ -260,11 +184,46 @@ public class AlunoView {
 			txtCPF = new javax.swing.JFormattedTextField(dt);
 		} catch (Exception e) {
 		}
-		txtCPF.setBounds(367, 68, 95, 20);
+		txtCPF.setBounds(377, 68, 95, 20);
 
+		jpwSenha.setBounds(95, 93, 100, 20);
+
+		// definindo painel de cidade
+
+		lblCidade.setText("Cidade");
+		lblCidade.setBounds(340, 275, 80, 20);
+
+		lblEstado.setText("Estado");
+		lblEstado.setBounds(340, 248, 80, 20);
+
+		lblLogradouro.setText("Logradouro");
+		lblLogradouro.setBounds(5, 250, 80, 20);
+
+		lblNum.setText("Numero");
+		lblNum.setBounds(5, 275, 80, 20);
+
+		lblCep.setText("Cep");
+		lblCep.setBounds(5, 300, 80, 20);
+
+		lblComplemento.setText("Complemento");
+		lblComplemento.setBounds(5, 325, 80, 20);
+
+		lblBairro.setText("Bairro");
+		lblBairro.setBounds(5, 350, 80, 20);
+
+		lblSenha.setText("Senha");
+		lblSenha.setBounds(5, 90, 83, 20);
+
+		lblTelefone.setText("Telefone");
+		lblTelefone.setBounds(5, 114, 80, 20);
+
+		// Declaração dos textfields
+
+		txtMatricula.setBounds(410, 43, 95, 20);
 		txtLogradouro.setBounds(95, 250, 200, 20);
 
 		// formatação do campo CEP
+
 		try {
 			javax.swing.text.MaskFormatter dt = new javax.swing.text.MaskFormatter("#####-###");
 			txtCep = new javax.swing.JFormattedTextField(dt);
@@ -273,90 +232,193 @@ public class AlunoView {
 		txtCep.setBounds(95, 300, 70, 20);
 
 		txtComplemento.setBounds(95, 325, 200, 20);
-		
+
 		txtBairro.setBounds(95, 350, 200, 20);
 
 		txtNum.setBounds(95, 275, 200, 20);
 
-		try {
-			javax.swing.text.MaskFormatter dt = new javax.swing.text.MaskFormatter("(##)#####-####");
-			txtTelefone = new javax.swing.JFormattedTextField(dt);
-		} catch (Exception e) {
-		}
-		txtTelefone.setBounds(95, 115, 100, 20);
-
 		// configuração da combobox estados
+		EstadoController ec = new EstadoController();
+
+		String dadosEstado[] = ec.listarTodos().split(";");
+		int e = 0;
+		while (e < dadosEstado.length) {
+
+			cboxEstado.addItem(dadosEstado[e]);
+
+			e++;
+		}
 
 		cboxEstado.setSelectedIndex(-1);
 		cboxEstado.setBounds(385, 250, 120, 20);
 		cboxEstado.setMaximumRowCount(28);
 
 		// configuração da combobox Cidades
+		CidadeController cc = new CidadeController();
+
+		String dadosCidade[] = cc.listarTodos().split(";");
+		int c = 0;
+		while (c < dadosCidade.length) {
+
+			cboxCidade.addItem(dadosCidade[c]);
+
+			c++;
+		}
 
 		cboxCidade.setSelectedIndex(-1);
 		cboxCidade.setBounds(385, 275, 120, 20);
 		cboxCidade.setMaximumRowCount(28);
 
-		// configuração do campo senha
-		jpwSenha.setBounds(95, 93, 100, 20);
+		// declaração de radio buttons masculino e feminino
+		rbtMasculino.setText("Masculino");
+		rbtMasculino.setBounds(225, 103, 90, 20);
 
-		painelSexo.setBounds(213, 87, 200, 50);
+		rbtFeminino.setText("Feminino");
+		rbtFeminino.setBounds(325, 103, 85, 20);
+
+		// adição dos botões ao button group
+		grpRadio.add(rbtMasculino);
+		grpRadio.add(rbtFeminino);
+
+		cancelar.setBounds(125, 385, 100, 20);
+		cancelar.addActionListener(new ActionListener() {
+
+		
+			public void actionPerformed(ActionEvent e) {
+				janela.setVisible(false);
+
+			}
+		});
+
+		salvar.setBounds(259,385,100,20);
+
+		salvar.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				try {
+					String uf = "";
+					String sexo = "";
+					String cidade = cboxCidade.getSelectedItem().toString().toUpperCase();
+					String estado = cboxEstado.getSelectedItem().toString().toUpperCase();
+
+					if (cidade.equals("SÃO PAULO")) {
+						uf = "SP";
+					} else if (cidade.equals("RIO DE JANEIRO")) {
+						uf = "RJ";
+					} else if (cidade.equals("DISTRITO FEDERAL")) {
+						uf = "DF";
+					}
+
+					AlunoController al = new AlunoController();
+
+					if (rbtFeminino.isSelected()) {
+						sexo = "F";
+					} else if (rbtMasculino.isSelected()) {
+						sexo = "M";
+
+					}
+
+					al.consistirDados(txtMatricula.getText(), txtNome.getText(), txtDataNasc.getText(), sexo, cidade,
+							estado, txtRG.getText(), txtCPF.getText(), txtTelefone.getText(), jpwSenha.getText(),
+							txtNum.getText(), txtCep.getText(), txtComplemento.getText(), txtLogradouro.getText(),
+							txtBairro.getText(), uf);
+					
+					txtMatricula.setText("");
+					txtNome.setText("");
+					txtDataNasc.setText("");
+					txtRG.setText("");
+					txtCPF.setText("");
+					txtTelefone.setText("");
+					jpwSenha.setText("");
+					txtNum.setText("");
+					txtCep.setText("");
+					txtComplemento.setText("");
+					txtLogradouro.setText("");
+					txtBairro.setText("");
+					cboxCidade.setSelectedIndex(-1);
+					cboxEstado.setSelectedIndex(-1);
+					rbtMasculino.setSelected(false);
+					rbtFeminino.setSelected(false);
+					
+
+					JOptionPane.showMessageDialog(null, "Cadastro concluido com sucesso!", "Sucesso", 1);
+				} catch (NullPointerException n) {
+					JOptionPane.showMessageDialog(null, "Campos preenchidos incorretamente");
+				} catch (NumberFormatException ne) {
+					JOptionPane.showMessageDialog(null, "Formato inváido"); 
+				}catch (StringIndexOutOfBoundsException si) {
+					JOptionPane.showMessageDialog(null, "Selecione um sexo!");
+				}
+			}
+		});
+		
+		painelSexo.setBounds(245, 125, 200, 50);
 		painelSexo.setLayout(new GridLayout(1, 0, 0, 0));
-		painelSexo.setBorder(new TitledBorder("Sexo"));
-		painelSexo.setForeground(new Color(244, 82, 10));
+		painelSexo.setBorder(BorderFactory.createEtchedBorder());
+		painelSexo.add(rbtMasculino);
+		painelSexo.add(rbtFeminino);
 
-		// adicionando componentes no painel da tela
+		painel1.setBounds(1, 1, 517, 205);
+		painel1.setLayout(null);
+		painel1.setBorder(BorderFactory.createEtchedBorder());
 
-		painelDaJanela.add(lblMatricula);
-		painelDaJanela.add(titulo);
-		painelDaJanela.add(tituloEnd);
-		painelDaJanela.add(lblNome);
-		painelDaJanela.add(lblDataNasc);
-		painelDaJanela.add(lblRG);
-		painelDaJanela.add(lblCPF);
+		painel2.setBounds(1, 206, 517, 205);
+		painel2.setLayout(null);
+		painel2.setBorder(BorderFactory.createEtchedBorder());
+
+		painel1.add(lblTitulo);
+		painel1.add(lblCPF);
+		painel1.add(lblDataNasc);
+		painel1.add(lblNome);
+		painel1.add(lblRG);
+		painel1.add(lblTelefone);
+		painel1.add(txtCPF);
+		painel1.add(txtDataNasc);
+		painel1.add(txtNome);
+		painel1.add(txtRG);
+		painel1.add(txtTelefone);
+		painel1.add(jtfSenha);
+		painel1.add(lblSenha);
+		painel1.add(jpwSenha);
+		painel1.add(lblMatricula);
+		painel1.add(txtMatricula);
+		painel1.add(painelSexo);
+		painel1.add(lblSexo);
+		
+		painelDaJanela.add(cancelar);
+		painelDaJanela.add(salvar);
 		painelDaJanela.add(lblCidade);
 		painelDaJanela.add(lblEstado);
-		painelDaJanela.add(lblSenha);
 		painelDaJanela.add(lblTelefone);
 		painelDaJanela.add(lblLogradouro);
 		painelDaJanela.add(lblNum);
 		painelDaJanela.add(lblComplemento);
 		painelDaJanela.add(lblCep);
 		painelDaJanela.add(lblBairro);
-		painelDaJanela.add(txtMatricula);
-		painelDaJanela.add(txtNome);
-		painelDaJanela.add(txtDataNasc);
-		painelDaJanela.add(txtRG);
-		painelDaJanela.add(txtCPF);
 		painelDaJanela.add(txtLogradouro);
 		painelDaJanela.add(txtCep);
 		painelDaJanela.add(txtNum);
 		painelDaJanela.add(txtComplemento);
-		painelDaJanela.add(txtTelefone);
 		painelDaJanela.add(txtBairro);
-		painelDaJanela.add(salvar);
-		painelDaJanela.add(cancelar);
-		painelDaJanela.add(rbtMasculino);
-		painelDaJanela.add(rbtFeminino);
 		painelDaJanela.add(cboxEstado);
 		painelDaJanela.add(cboxCidade);
-		painelDaJanela.add(jpwSenha);
-		painelDaJanela.add(painelSexo);
+		painelDaJanela.add(lbltituloEnd);
 
-		// configurações do painel da tela
+		// configuração do painel da janela
 		painelDaJanela.setLayout(null);
+		painelDaJanela.add(painel1);
+		painelDaJanela.add(painel2);
 
 		// configurações da tela
-
 		janela.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		janela.setSize(525, 500);
+		janela.setSize(new Dimension(525, 450));
+		janela.setLocationRelativeTo(null);
 		janela.setVisible(true);
-		janela.setLocationRelativeTo(null);
 
-		janela = new JFrame("Cadastro de Aluno");
-		janela.getContentPane().setLayout(null);
-		janela.setLocationRelativeTo(null);
+	}
 
-	}// fim do inicia gui
+	public static void main(String[] args) {
+
+	}
 
 }

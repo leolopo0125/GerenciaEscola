@@ -2,7 +2,8 @@ package model;
 /**
  * Introdução a modificadores de restrição
  * @author llopo
- *
+ * @since 20/02/2020
+ *@version 0.1
  */
 		
 public class Data {

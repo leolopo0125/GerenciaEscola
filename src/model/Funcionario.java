@@ -1,4 +1,10 @@
 package model;
+/**
+ * Classe modelo de funcionario
+ * @author llopo
+ *@since 26/02/2020
+ *@version 0.1
+ */
 
 public class Funcionario {
 	private int id;

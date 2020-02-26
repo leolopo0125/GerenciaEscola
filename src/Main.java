@@ -1,6 +1,7 @@
+
 import controller.AlunoController;
 import controller.ProfessorController;
-import view.AlunoView;
+import view.Base;
 import view.MenuView;
 
 /**
@@ -15,7 +16,7 @@ public static void main(String[] args) {
 
 	ProfessorController pc = new ProfessorController();
 	AlunoController ac = new AlunoController();
-	AlunoView av = new AlunoView();
+	Base av = new Base();
 	MenuView menu = new MenuView();
 	
 	

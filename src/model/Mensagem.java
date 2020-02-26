@@ -1,4 +1,10 @@
 package model;
+/**
+ * classe modelo de mensagem
+ * @author llopo
+ *@since 20/02/2020
+ *@version 0.1
+ */
 
 public class Mensagem {
 

@@ -1,4 +1,9 @@
 package view;
+/**
+ * @author llopo
+ * @since 26/02/2020
+ * @version 0.1
+ */
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,7 +32,7 @@ public class MenuView {
 	public void iniciaGui() {
 		
 		//criar as instancias
-		janela = new JFrame("Exemplo de menu");
+		janela = new JFrame("Menu de cadastro");
 		barraMenu = new JMenuBar();
 		menu01 = new JMenu("Cadastro");
 		menu02 = new JMenu("Registro");
@@ -63,6 +68,44 @@ public class MenuView {
 			
 			public void actionPerformed(ActionEvent e) {
 				new FuncionarioView().iniciaGui();	
+				
+			}
+		});
+		itemMenu3.addActionListener(new ActionListener() {
+			
+			
+			public void actionPerformed(ActionEvent e) {
+				
+				new CidadeView().iniciaGui();
+				
+			}
+		});
+		itemMenu4.addActionListener(new ActionListener() {
+			
+			
+			public void actionPerformed(ActionEvent e) {
+				
+				new EstadoView().iniciaGui();
+				
+			}
+		});
+
+		itemMenu5.addActionListener(new ActionListener() {
+			
+			
+			public void actionPerformed(ActionEvent e) {
+				
+				new RelatorioAluno().iniciaGui();
+				
+			}
+		});
+		
+		itemMenu6.addActionListener(new ActionListener() {
+			
+			
+			public void actionPerformed(ActionEvent e) {
+				
+				new RelatorioFuncionario().iniciaGui();
 				
 			}
 		});
